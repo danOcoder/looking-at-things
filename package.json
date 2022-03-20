@@ -13,10 +13,6 @@
     "cz-conventional-changelog": "^3.3.0",
     "parcel": "latest"
   },
-  "dependencies": {
-    "dotenv": "^14.3.2",
-    "unsplash-js": "^7.0.15"
-  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"

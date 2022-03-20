@@ -5,5 +5,4 @@
 /dist
 
 # misc
-/.vscode
-.env
+.parcel-cache
