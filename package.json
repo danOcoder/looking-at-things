@@ -10,6 +10,7 @@
     "commit": "cz"
   },
   "devDependencies": {
+    "@parcel/transformer-sass": "^2.4.0",
     "cz-conventional-changelog": "^3.3.0",
     "parcel": "latest"
   },

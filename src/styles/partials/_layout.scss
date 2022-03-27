@@ -1,0 +1,22 @@
+.wrapper {
+  padding: 50px 0;
+}
+
+.outerContainer {
+  width: 90%;
+  max-width: 1600px;
+  margin: 0 auto;
+  border: 1px solid blue;
+}
+
+.innerContainerLarge {
+  max-width: 1600px;
+  margin: 0 auto;
+  border: 2px solid red;
+}
+
+.innerContainerSmall {
+  max-width: 1200px;
+  margin: 0 auto;
+  border: 2px solid rebeccapurple;
+}
