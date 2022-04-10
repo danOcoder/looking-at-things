@@ -6,3 +6,9 @@
 // })
 //   .then((res) => res.json())
 //   .then((res) => console.log("res", res.response));
+
+const randomBtn = document.getElementById("random-btn");
+
+randomBtn.addEventListener("click", () => {
+  console.log("👋 Hiiiiii");
+});

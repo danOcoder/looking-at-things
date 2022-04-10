@@ -1,4 +1,63 @@
+$decorativeFont: "Waiting for the Sunrise", cursive;
+
 body {
   width: 100%;
   background-color: #ffffff;
+}
+
+/**** HEADER ****/
+
+header {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  background-color: #ffffff;
+  padding: 10px 0;
+
+  .logoContainer {
+    width: 65px;
+  }
+
+  ul {
+    display: flex;
+  }
+
+  li {
+    transition: transform 250ms;
+    &:first-child {
+      margin-right: 30px;
+    }
+
+    &:hover {
+      transform: rotate(5deg);
+    }
+
+    &:nth-of-type(2) {
+      &:hover {
+        transform: rotate(-5deg);
+      }
+    }
+  }
+
+  button {
+    cursor: pointer;
+    font-family: $decorativeFont;
+    font-size: 25px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    padding: 5px;
+
+    &:active {
+      border-color: darkgray;
+    }
+  }
+}
+
+/**** Main ****/
+
+main {
+  // border: 1px solid blue;
+  height: 200vh;
 }

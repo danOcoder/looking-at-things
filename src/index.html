@@ -4,6 +4,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" type="image/png" href="./assests/icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Waiting+for+the+Sunrise&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./styles/index.scss" />
     <title>Looking at things</title>
 
@@ -12,17 +18,31 @@
   <body>
     <div class="wrapper">
       <div class="outerContainer">
-        <div class="innerContainerLarge">
-          <h1>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis
-            eligendi dolore, ex sed maiores molestiae necessitatibus quis
-            veritatis porro rerum iure beatae. Beatae illum quo cupiditate
-            voluptas ducimus, ut aliquam.
-          </h1>
-        </div>
-        <div class="innerContainerSmall">
-          <h1>Hiiiiii 👋</h1>
-        </div>
+        <header class="innerContainerSmall">
+          <div class="logoContainer">
+            <img src="./assests/logo.png" alt="" />
+          </div>
+          <nav>
+            <ul>
+              <li>
+                <button id="choose-btn">Choose a Thing</button>
+              </li>
+              <li>
+                <button id="random-btn">Random Things</button>
+              </li>
+            </ul>
+          </nav>
+        </header>
+        <main>
+          <section class="innerContainerLarge">
+            <h1>
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis
+              eligendi dolore, ex sed maiores molestiae necessitatibus quis
+              veritatis porro rerum iure beatae. Beatae illum quo cupiditate
+              voluptas ducimus, ut aliquam.
+            </h1>
+          </section>
+        </main>
       </div>
     </div>
   </body>
