@@ -1,0 +1,15 @@
+# dependencies
+/node_modules
+
+# production
+/dist
+/src/server/public
+/src/server/index.js
+/src/server/routes.js
+/src/server/controllers.js
+
+# Environments
+.env
+
+# misc
+.DS_Store
