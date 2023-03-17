@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const express = require("express");
 
 import * as path from "path";
@@ -6,7 +7,7 @@ import routes from "./routes";
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "../../dist")));
 
 app.use("/", routes);
 
