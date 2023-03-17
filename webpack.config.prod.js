@@ -11,8 +11,7 @@ module.exports = {
   },
   output: {
     filename: "[name].[contenthash].js",
-    path: path.resolve(__dirname, "src/server/public"),
-    clean: true,
+    path: path.resolve(__dirname, "./dist"),
   },
   mode: "production",
   externalsPresets: { node: true },
@@ -102,7 +101,7 @@ module.exports = {
       mode: "webapp",
       devMode: "webapp",
       favicons: {
-        appName: "looking-at-things",
+        appName: "Looking At Things",
         appDescription: "An App for looking at things",
         developerName: "Me",
         developerURL: null,

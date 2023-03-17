@@ -8,8 +8,8 @@
     "dev": "webpack serve --config webpack.config.dev.js  --hot",
     "lint": "eslint --ext .js,.ts .",
     "build": "webpack --config webpack.config.prod.js",
-    "prebuild": "tsc ./src/server/index.ts --outDir ./src/server",
-    "start": "export NODE_ENV=production && node ./src/server/index.js"
+    "prebuild": "tsc src/server/index.ts --outDir src/server",
+    "start": "node src/server/index.js"
   },
   "repository": {
     "type": "git",
