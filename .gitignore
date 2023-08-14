@@ -3,13 +3,13 @@
 
 # production
 /dist
-/src/server/public
-/src/server/index.js
-/src/server/routes.js
-/src/server/controllers.js
+/src/server/dist
+
 
 # Environments
-.env
+.env.dev
+.env.prod
 
 # misc
 .DS_Store
+.vscode
