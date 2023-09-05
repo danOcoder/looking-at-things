@@ -31,14 +31,6 @@
   display: block;
 }
 
-.svg__heart {
-  fill: var(--white);
-}
-
-.svg__heart--active {
-  fill: var(--rose);
-}
-
 .text__heading {
   font-family: var(--font-architects);
   font-size: var(--50px);

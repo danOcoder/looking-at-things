@@ -1,9 +1,9 @@
-export const getStateFromStorage = (key: string) => {
+export function getStateFromStorage<T>(key: string): T[] {
   const state = sessionStorage.getItem(key);
 
   if (!state) {
-    return null;
+    return [];
   }
 
   return JSON.parse(state);
-};
+}

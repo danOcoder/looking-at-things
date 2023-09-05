@@ -2,48 +2,44 @@ import { html } from "../../constants";
 
 export default abstract class View<T> {
   protected readonly parentElement: HTMLElement;
-  private errorMessage: string;
+  private fallbackMessage: string;
 
-  constructor(parentElement: HTMLElement, errorMessage: string) {
+  constructor(parentElement: HTMLElement, fallbackMessage: string) {
     this.parentElement = parentElement;
-    this.errorMessage = errorMessage;
+    this.fallbackMessage = fallbackMessage;
   }
 
   abstract generateMarkup(data: T): string;
 
   render(data: T) {
-    if (data === "" || (Array.isArray(data) && !data.length)) {
-      return this.renderError();
+    if (Array.isArray(data) && !data.length) {
+      return this.renderFallback();
     }
 
-    // generate new markup
     const markup = this.generateMarkup(data);
 
-    // clear current markup
-    this.clear();
+    this.updateDOM(markup);
+  }
 
-    // append new markup
-    this.parentElement.insertAdjacentHTML("afterbegin", markup);
+  private renderFallback() {
+    const markup = html`
+      <div>
+        <p>${this.fallbackMessage}</p>
+      </div>
+    `;
+
+    this.updateDOM(markup);
   }
 
   private clear() {
     this.parentElement.innerHTML = "";
   }
 
-  private renderError(message = this.errorMessage) {
-    if (!message) {
-      return;
-    }
-
-    const markup = html`
-      <div class="error">
-        <span> 💥💥💥 </span>
-        <p>${message}</p>
-      </div>
-    `;
-
+  private updateDOM(markup: string) {
+    // clear current markup
     this.clear();
 
+    // append new markup
     this.parentElement.insertAdjacentHTML("afterbegin", markup);
   }
 }
