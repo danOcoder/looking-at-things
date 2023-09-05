@@ -1,41 +1,35 @@
 import { produce } from "immer";
-import { State } from "../types/classes/State";
-import { getStateFromStorage } from "../utils/getStateFromStorage";
+import State from "../types/classes/State";
 import { setSateInStorage } from "../utils/setStateInStorage";
+import { getStateFromStorage } from "../utils/getStateFromStorage";
 
-export type SavedState = {
-  saved: string[];
-};
+export type SavedType = string[];
 
-const INITIAL_STATE: SavedState = {
-  saved: getStateFromStorage("saved") || [],
-};
+const INITIAL_STATE = getStateFromStorage<string>("saved");
 
-class Model extends State<SavedState> {
-  constructor(initialState: SavedState, stateKey: string) {
+class Saved extends State<SavedType> {
+  constructor(initialState: SavedType, stateKey: string) {
     super(initialState, stateKey);
   }
 
   removeSaved(id: string) {
-    this._state.update(
-      produce((draft) => {
-        const idx = draft.saved.indexOf(id);
-        draft.saved.splice(idx, 1);
-        setSateInStorage("saved", draft.saved);
+    this._state.update((state) =>
+      produce(state, (draft) => {
+        const idx = draft.indexOf(id);
+        draft.splice(idx, 1);
+        setSateInStorage("saved", draft);
       })
     );
   }
 
   setSaved(id: string) {
-    this._state.update(
-      produce((draft) => {
-        draft.saved.push(id);
-        setSateInStorage("saved", draft.saved);
+    this._state.update((state) =>
+      produce(state, (draft) => {
+        draft.push(id);
+        setSateInStorage("saved", draft);
       })
     );
   }
 }
 
-const model = new Model(INITIAL_STATE, "Saved._state");
-
-export default model;
+export const saved = new Saved(INITIAL_STATE, "Saved._state");

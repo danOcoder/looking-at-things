@@ -1,10 +1,10 @@
+import styles from "./Nav.module.css";
+import utils from "../../styles/utils.module.css";
+
 import View from "../../types/classes/View";
 import { html } from "../../constants";
 import Logo from "../../assets/logo.png";
 import HeartIcon from "../../assets/heart.svg";
-
-import styles from "./Nav.module.css";
-import utils from "../../styles/utils.module.css";
 
 type State = number;
 
@@ -31,8 +31,8 @@ class Nav extends View<State> {
             <span class="${styles["text__count"]}">${state}</span>
             <svg
               class="${[
-                styles["svg__heart"],
-                state !== 0 && styles["svg__heart--active"],
+                utils["svg__heart"],
+                state !== 0 && utils["svg__heart--active"],
               ].join(" ")}"
               width="85px"
               height="85px"
