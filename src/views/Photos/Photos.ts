@@ -72,10 +72,6 @@ class Photos extends View<State> {
                 </button>
               </div>
             </div>
-
-            <dialog class=${styles["dialog__photo"]} id="${id}-dialog">
-              <h1>Dialog!!! 👋</h1>
-            </dialog>
           `;
         })
         .toString()
@@ -90,22 +86,6 @@ class Photos extends View<State> {
 
       saveBtn.addEventListener("click", () => {
         cb(id);
-      });
-    });
-  }
-
-  handleDialog(photoIds: string[]) {
-    photoIds.forEach((id) => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const photoEl = document.getElementById(id)!;
-
-      photoEl.addEventListener("click", () => {
-        console.log("ran");
-
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        const dialogEl = document.getElementById(`${id}-dialog`)! as HTMLDialogElement;
-
-        dialogEl.showModal();
       });
     });
   }

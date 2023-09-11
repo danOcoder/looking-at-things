@@ -34,7 +34,6 @@ react("update photos", () => {
 
   Photos.render(data.state);
   Photos.handleSave(ids, handleToggleSaved);
-  Photos.handleDialog(ids);
 
   if (data.state.length === 0) {
     data.setData(getRandom.bind(null, INITIAL_DATA_COUNT));
