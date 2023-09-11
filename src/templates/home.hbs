@@ -1,4 +1,4 @@
-<html lang="en">
+<!DOCTYPE html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,10 +12,29 @@
     />
   </head>
   <body>
-    <header id="header">
+    <header class="wrapper">
+      <nav class="nav__container--uber">
+        <div class="nav__container--uber-inner">
+          <div class="nav__container--heading">
+            <div class="nav__container--logo">
+              <img class="nav__img--logo" src="/assets/logo.png" alt="" />
+            </div>
+            <h1 class="nav__text--heading">Looking At Things</h1>
+          </div>
+          <a
+            id="saved"
+            class="saved__container--uber"
+            href={{htmlWebpackPlugin.options.savedRoute}}
+          >
+            <span class="visibility-hidden">Saved page</span>
+          </a>
+        </div>
+      </nav>
     </header>
     <main>
-      <section id="photos"></section>
+      <section id="photos_container" class="photos__container--uber wrapper">
+        <div>We're getting things ready</div>
+      </section>
     </main>
   </body>
 </html>

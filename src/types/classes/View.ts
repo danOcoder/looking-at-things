@@ -13,7 +13,8 @@ export default abstract class View<T> {
 
   render(data: T) {
     if (Array.isArray(data) && !data.length) {
-      return this.renderFallback();
+      this.renderFallback();
+      return;
     }
 
     const markup = this.generateMarkup(data);

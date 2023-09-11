@@ -2,12 +2,12 @@ import "../styles/normalize.css";
 import "../styles/reset.css";
 import "../styles/index.css";
 
-import { saved } from "../models/saved";
-import Nav from "../views/Nav/Nav";
+// import { saved } from "../models/saved";
+// import Nav from "../views/SavedLink/SavedLink";
 
-// init
-(() => {
-  const { state: savedState } = saved;
+// // init
+// (() => {
+//   const { state: savedState } = saved;
 
-  Nav.render(savedState.length);
-})();
+//   Nav.render(savedState.length);
+// })();

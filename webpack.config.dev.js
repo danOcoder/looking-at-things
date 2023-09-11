@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 
 module.exports = {
@@ -57,22 +58,20 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
         exclude: /\.module\.css$/,
+        use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.css$/,
+        test: /\.module\.css$/,
         use: [
           "style-loader",
           {
             loader: "css-loader",
             options: {
-              importLoaders: 1,
               modules: true,
             },
           },
         ],
-        include: /\.module\.css$/,
       },
       {
         test: /\.ts?$/,
@@ -86,6 +85,9 @@ module.exports = {
     ],
   },
   plugins: [
+    new CopyPlugin({
+      patterns: [{ from: "src/assets/logo.png", to: "assets" }],
+    }),
     new Dotenv({
       path: "./.env.dev",
     }),
@@ -95,6 +97,7 @@ module.exports = {
       filename: "home-page.html",
       title: "Home | Looking At Things",
       description: "An App for looking at things",
+      savedRoute: "/saved-page.html",
     }),
     new HtmlWebpackPlugin({
       template: "./src/templates/saved.hbs",
