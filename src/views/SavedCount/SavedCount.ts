@@ -25,7 +25,6 @@ class SavedCount extends View<State> {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-const savedLink = new SavedCount(document.getElementById("saved")!);
+const savedLink = new SavedCount(document.getElementById("saved") as HTMLElement);
 
 export default savedLink;

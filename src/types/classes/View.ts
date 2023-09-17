@@ -12,9 +12,9 @@ export default abstract class View<T> {
   abstract generateMarkup(data: T): string;
 
   render(data: T) {
-    if (Array.isArray(data) && !data.length) {
+    // TODO: figure out how/when to handle this
+    if (!data) {
       this.renderFallback();
-      return;
     }
 
     const markup = this.generateMarkup(data);
@@ -29,7 +29,9 @@ export default abstract class View<T> {
       </div>
     `;
 
-    this.updateDOM(markup);
+    console.log("markup", markup);
+
+    // this.updateDOM(markup);
   }
 
   private clear() {

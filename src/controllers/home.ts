@@ -7,6 +7,7 @@ import { react } from "signia";
 import { saved } from "../models/saved";
 import { data } from "../models/data";
 
+import NavHeading from "../views/NavHeading/NavHeading";
 import SavedCount from "../views/SavedCount/SavedCount";
 import Photos from "../views/Photos/Photos";
 
@@ -14,8 +15,7 @@ import { getRandom } from "../api/getRandom";
 import { INITIAL_DATA_COUNT } from "../constants";
 
 const handleToggleSaved = (id: string) => {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const savedIndicatorEl = document.getElementById(`${id}-saved`)!;
+  const savedIndicatorEl = document.getElementById(`${id}-saved`) as HTMLElement;
 
   if (saved.state.includes(id)) {
     saved.removeSaved(id);
@@ -46,13 +46,14 @@ react("update saved count", () => {
   SavedCount.render(saved.state.length);
 });
 
-// initialize
+// initial render
 (() => {
+  NavHeading.render(null);
+
   const ids = data.state.map((photo) => photo.id);
 
   ids.forEach((id) => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const savedIndicatorEl = document.getElementById(`${id}-saved`)!;
+    const savedIndicatorEl = document.getElementById(`${id}-saved`) as HTMLElement;
 
     if (saved.state.includes(id)) {
       savedIndicatorEl.classList.add("svg__heart--active");

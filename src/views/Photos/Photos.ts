@@ -92,8 +92,7 @@ class Photos extends View<State> {
 }
 
 const photos = new Photos(
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  document.getElementById("photos_container")!,
+  document.getElementById("photos_container") as HTMLElement,
   "Nothing to see here..."
 );
 
