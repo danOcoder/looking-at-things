@@ -23,8 +23,6 @@ class Photos extends View<State> {
 
           const isLandScape = width > height;
 
-          console.log("isLandScape", isLandScape);
-
           const nameText = name ? name : "Unknown";
           let nameEl;
 
@@ -45,7 +43,8 @@ class Photos extends View<State> {
           return html`
             <div class=${styles["container__card"]}>
               <div class=${styles["container__photo--uber"]}>
-                <div
+                <button
+                  id="${id}-photo-btn"
                   class="${[
                     styles["container__photo"],
                     isLandScape && styles["container__photo--landscape"],
@@ -58,13 +57,12 @@ class Photos extends View<State> {
                     ].join(" ")}"
                     src=${regular}
                     alt=${alt_description}
-                    id=${id}
                   />
-                </div>
+                </button>
               </div>
               <div class=${styles["container__details"]}>
                 ${nameEl.outerHTML}
-                <button class=${styles["btn__save"]} id=${id} name="save">
+                <button class=${styles["btn__save"]} id="${id}-save-btn" name="save">
                   <svg id="${id}-saved" class="svg__heart" width="35px" height="35px">
                     <use href="${HeartIcon}#heart" />
                   </svg>
@@ -81,10 +79,19 @@ class Photos extends View<State> {
 
   handleSave(photoIds: string[], cb: (id: string) => void) {
     photoIds.forEach((id) => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const saveBtn = document.getElementById(id)!;
+      const saveBtn = document.getElementById(`${id}-save-btn`) as HTMLButtonElement;
 
       saveBtn.addEventListener("click", () => {
+        cb(id);
+      });
+    });
+  }
+
+  handleDialog(photoIds: string[], cb: (id: string) => void) {
+    photoIds.forEach((id) => {
+      const photoBtn = document.getElementById(`${id}-photo-btn`) as HTMLImageElement;
+
+      photoBtn.addEventListener("click", () => {
         cb(id);
       });
     });

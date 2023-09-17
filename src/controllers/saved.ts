@@ -3,7 +3,7 @@ import "../styles/reset.css";
 import "../styles/index.css";
 import NavHeading from "../views/NavHeading/NavHeading";
 
-// initialize
+// initial render
 (() => {
   NavHeading.render(null);
 })();
