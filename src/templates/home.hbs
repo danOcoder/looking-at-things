@@ -1,4 +1,4 @@
-<!DOCTYPE html lang="en">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -28,8 +28,20 @@
       </nav>
     </header>
     <main>
+      <dialog class="photo-dialog__container--uber" id="photo-dialog">
+        <button
+          class="photo-dialog__btn--close"
+          aria-label="Close dialog"
+          id="photo-dialog-close"
+        >
+          <svg class="" width="25px" height="25px">
+            <use href="/assets/close.svg#close" />
+          </svg>
+        </button>
+        <div class="photo-dialog__container--img" id="photo-dialog-container"></div>
+      </dialog>
       <section id="photos_container" class="photos__container--uber wrapper">
-        <div>We're getting things ready</div>
+        {{! <div>We're getting things ready</div> }}
       </section>
     </main>
   </body>
