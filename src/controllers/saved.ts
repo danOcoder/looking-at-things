@@ -1,13 +1,9 @@
 import "../styles/normalize.css";
 import "../styles/reset.css";
 import "../styles/index.css";
+import NavHeading from "../views/NavHeading/NavHeading";
 
-import { saved } from "../models/saved";
-import Nav from "../views/Nav/Nav";
-
-// init
+// initialize
 (() => {
-  const { state: savedState } = saved;
-
-  Nav.render(savedState.length);
+  NavHeading.render(null);
 })();

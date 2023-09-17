@@ -57,22 +57,20 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
         exclude: /\.module\.css$/,
+        use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.css$/,
+        test: /\.module\.css$/,
         use: [
           "style-loader",
           {
             loader: "css-loader",
             options: {
-              importLoaders: 1,
               modules: true,
             },
           },
         ],
-        include: /\.module\.css$/,
       },
       {
         test: /\.ts?$/,
@@ -95,6 +93,7 @@ module.exports = {
       filename: "home-page.html",
       title: "Home | Looking At Things",
       description: "An App for looking at things",
+      savedRoute: "/saved-page.html",
     }),
     new HtmlWebpackPlugin({
       template: "./src/templates/saved.hbs",

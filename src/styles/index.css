@@ -58,3 +58,72 @@
 body {
   background: var(--white);
 }
+
+/* utils */
+.wrapper {
+  width: 90%;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.svg__heart {
+  fill: var(--white);
+}
+
+.svg__heart--active {
+  fill: var(--rose);
+}
+
+/* nav */
+.nav__container--uber {
+  border: 1px solid red;
+  padding: 20px;
+}
+
+.nav__container--uber-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.nav__container--heading {
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+}
+
+/* saved */
+.saved__container--uber {
+  display: block;
+  position: relative;
+}
+
+/* photos */
+.photos__container--uber {
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 50px;
+  row-gap: 20px;
+}

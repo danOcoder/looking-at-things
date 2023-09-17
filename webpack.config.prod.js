@@ -51,6 +51,19 @@ module.exports = {
       },
       {
         test: /\.css$/,
+        exclude: /\.module\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 1,
+            },
+          },
+        ],
+      },
+      {
+        test: /\.module\.css$/,
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -79,6 +92,7 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({
       filename: "[name].[contenthash].css",
+      chunkFilename: "[id].[contenthash].css",
     }),
     new HtmlWebpackPlugin({
       template: "./src/templates/home.hbs",
@@ -86,6 +100,7 @@ module.exports = {
       filename: "home-page.html",
       title: "Home | Looking At Things",
       description: "An App for looking at things",
+      savedRoute: "/saved",
     }),
     new HtmlWebpackPlugin({
       template: "./src/templates/saved.hbs",

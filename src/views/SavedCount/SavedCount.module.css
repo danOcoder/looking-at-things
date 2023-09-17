@@ -1,0 +1,9 @@
+.text__count {
+  font-family: var(--font-architects);
+  font-size: var(--16px);
+  color: var(--white);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
