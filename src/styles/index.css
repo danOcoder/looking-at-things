@@ -136,6 +136,14 @@ body {
   row-gap: 20px;
 }
 
+/* pagination buttons */
+.pagination-buttons__container--uber {
+  border: 1px solid red;
+  display: flex;
+  justify-content: center;
+  padding: 50px;
+}
+
 /* photo dialog – animation from https://www.cssscript.com/accessible-modal-dialog-animations/ */
 
 .photo-dialog__btn--close {

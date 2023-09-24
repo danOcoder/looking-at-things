@@ -2,12 +2,11 @@ import type { PhotoData } from "../types/api";
 import State from "../types/classes/State";
 import { getStateFromStorage } from "../utils/getStateFromStorage";
 import { setSateInStorage } from "../utils/setStateInStorage";
+import { paginateData } from "../utils/paginateData";
 
-// import { DUMMY_DATA } from "../constants";
+export type DataType = PhotoData.Photo[][];
 
-export type DataType = PhotoData.Photo[];
-
-const INITIAL_STATE: DataType = getStateFromStorage<PhotoData.Photo>("data");
+const INITIAL_STATE = getStateFromStorage<DataType>("data", []);
 
 class Data extends State<DataType> {
   constructor(initialState: DataType, stateKey: string) {
@@ -19,13 +18,15 @@ class Data extends State<DataType> {
       this._state.update(() => {
         const { response } = res;
 
-        const data = Array.isArray(response) ? response : [];
-        setSateInStorage("data", data);
+        const data = Array.isArray(response) ? paginateData(response) : [];
 
+        console.log("data", data);
+
+        setSateInStorage("data", data);
         return data;
       });
     });
   }
 }
 
-export const data = new Data(INITIAL_STATE, "Home._state");
+export const data = new Data(INITIAL_STATE, "Data._state");

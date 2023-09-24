@@ -6,11 +6,13 @@ import { react } from "signia";
 
 import { saved } from "../models/saved";
 import { data } from "../models/data";
+import { page } from "../models/page";
 
 import NavHeading from "../views/NavHeading/NavHeading";
 import SavedCount from "../views/SavedCount/SavedCount";
 import Photos from "../views/Photos/Photos";
 import PhotoDialog from "../views/PhotoDialog/PhotoDialog";
+import PaginationButtons from "../views/PaginationButtons/PaginationButtons";
 
 import { getRandom } from "../api/getRandom";
 import { INITIAL_DATA_COUNT } from "../constants";
@@ -36,10 +38,13 @@ const handleToggleSaved = (id: string) => {
   }
 };
 const handleOpenDialog = (id: string) => {
-  scrollPosition = window.scrollY;
-  const photoIdx = data.state.findIndex((photo) => photo.id === id);
+  const currentPage = page.state;
+  const _data = data.state[currentPage];
 
-  PhotoDialog.render(data.state[photoIdx]);
+  scrollPosition = window.scrollY;
+  const photoIdx = _data.findIndex((photo) => photo.id === id);
+
+  PhotoDialog.render(_data[photoIdx]);
   dialogEl.showModal();
   bodyEl.classList.add("dialog-open");
 };
@@ -54,31 +59,56 @@ const handleCloseDialog = () => {
   dialogEl.addEventListener("webkitAnimationEnd", handleAnimationEnd, false);
   bodyEl.classList.remove("dialog-open");
 };
-
-// react
+// signals
 react("update photos", () => {
   console.log("photos updated");
-  const ids = data.state.map((photo) => photo.id);
-
-  Photos.render(data.state);
-  Photos.handleSave(ids, handleToggleSaved);
-  Photos.handleDialog(ids, handleOpenDialog);
 
   if (data.state.length === 0) {
     data.setData(getRandom.bind(null, INITIAL_DATA_COUNT));
   }
+
+  const currentPage = page.state;
+  const _data = data.state[currentPage];
+
+  console.log("currentPage", currentPage);
+  console.log("_data", _data);
+
+  const ids = _data.map((photo) => photo.id);
+
+  Photos.render(_data);
+  Photos.handleSave(ids, handleToggleSaved);
+  Photos.handleDialog(ids, handleOpenDialog);
 });
 react("update saved count", () => {
   console.log("saved count updated");
 
   SavedCount.render(saved.state.length);
 });
+react("update page", () => {
+  console.log("page updated");
+
+  const currentPage = page.state;
+  const _data = data.state[currentPage];
+
+  PaginationButtons.render({
+    currentPage: currentPage,
+    totalPages: _data.length,
+  });
+
+  PaginationButtons.handleIncrementPage(() => {
+    page.incrementPage();
+  });
+  PaginationButtons.handleDecrementPage(() => {
+    page.decrementPage();
+  });
+});
 
 // initial render
 NavHeading.render(null);
 dialogCloseEl.addEventListener("click", handleCloseDialog);
 dialogEl.addEventListener("click", handleCloseDialog);
-const ids = data.state.map((photo) => photo.id);
+
+const ids = data.state[page.state].map((photo) => photo.id);
 ids.forEach((id) => {
   const savedIndicatorEl = document.getElementById(`${id}-saved`) as HTMLElement;
 

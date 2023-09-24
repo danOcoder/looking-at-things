@@ -1,8 +1,8 @@
-export function getStateFromStorage<T>(key: string): T[] {
+export function getStateFromStorage<T>(key: string, fallback: T): T {
   const state = sessionStorage.getItem(key);
 
   if (!state) {
-    return [];
+    return fallback;
   }
 
   return JSON.parse(state);

@@ -8,6 +8,10 @@ abstract class State<T> {
   get state() {
     return this._state.value;
   }
+
+  lastChangedEpoch() {
+    return this._state.lastChangedEpoch;
+  }
 }
 
 export default State;

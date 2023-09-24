@@ -5,7 +5,7 @@ import { getStateFromStorage } from "../utils/getStateFromStorage";
 
 export type SavedType = string[];
 
-const INITIAL_STATE = getStateFromStorage<string>("saved");
+const INITIAL_STATE = getStateFromStorage<SavedType>("saved", []);
 
 class Saved extends State<SavedType> {
   constructor(initialState: SavedType, stateKey: string) {

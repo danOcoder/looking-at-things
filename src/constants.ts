@@ -4,6 +4,8 @@ export const html = String.raw;
 
 export const INITIAL_DATA_COUNT = 30;
 
+export const PAGE_SIZE = 10;
+
 export const DUMMY_RESPONSE: PhotoData.Response = {
   type: "type",
   status: 200,

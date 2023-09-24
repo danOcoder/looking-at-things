@@ -42,7 +42,7 @@ export default abstract class View<T> {
     // clear current markup
     this.clear();
 
-    // append new markup
+    // insert new markup
     this.parentElement.insertAdjacentHTML("afterbegin", markup);
   }
 }
