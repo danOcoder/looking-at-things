@@ -10,11 +10,11 @@ class Page extends State<PageType> {
   }
 
   incrementPage() {
-    this._state.update((value) => value + 1);
+    this._state.update((prev) => prev + 1);
   }
 
   decrementPage() {
-    this._state.update((currPage) => currPage - 1);
+    this._state.update((prev) => prev - 1);
   }
 }
 

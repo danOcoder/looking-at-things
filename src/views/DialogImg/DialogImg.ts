@@ -1,4 +1,4 @@
-import styles from "./PhotoDialog.module.css";
+import styles from "./DialogImg.module.css";
 
 import type { PhotoData } from "../../types/api";
 
@@ -7,9 +7,9 @@ import { html } from "../../constants";
 
 type State = PhotoData.Photo;
 
-class PhotoDialogImg extends View<State> {
+class DialogImg extends View<State> {
   constructor(parentElement: HTMLElement) {
-    super(parentElement, "");
+    super(parentElement);
   }
 
   generateMarkup(state: State): string {
@@ -31,8 +31,8 @@ class PhotoDialogImg extends View<State> {
   }
 }
 
-const photoDialog = new PhotoDialogImg(
+const dialogImg = new DialogImg(
   document.getElementById("photo-dialog-container") as HTMLElement
 );
 
-export default photoDialog;
+export default dialogImg;

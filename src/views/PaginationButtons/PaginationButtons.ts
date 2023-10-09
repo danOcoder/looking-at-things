@@ -1,47 +1,68 @@
 import styles from "./PaginationButtons.module.css";
 
-import View from "../../types/classes/View";
+import type { DataType } from "../../models/data";
+
 import { html } from "../../constants";
+import NextIcon from "../../assets/next.svg";
+import PreviousIcon from "../../assets/previous.svg";
 
-type State = {
-  currentPage: number;
-  totalPages: number;
-};
+class PaginationButtons {
+  constructor(private parentElement: HTMLElement) {}
 
-class PaginationButtons extends View<State> {
-  constructor(parentElement: HTMLElement) {
-    super(parentElement, "");
-  }
-
-  generateMarkup(state: State): string {
-    console.log("state", state);
-
+  generateMarkup(): string {
     return html`
       <div class=${styles["container__inner"]}>
-        <button
-          class=${styles["btn__page"]}
-          id="prev-page-btn"
-          aria-label="Previous Page"
-        >
-          Previous Page
+        <button id="prev-page-btn" aria-label="Previous Page" class=${styles["btn"]}>
+          <svg width="65px" height="65px">
+            <use href="${PreviousIcon}#previous" />
+          </svg>
         </button>
-        <button class=${styles["btn__page"]} id="next-page-btn" aria-label="Next Page">
-          Next Page
+        <button id="next-page-btn" aria-label="Next Page">
+          <svg width="65px" height="65px">
+            <use href="${NextIcon}#next" />
+          </svg>
         </button>
       </div>
     `;
   }
 
-  handleIncrementPage(cb: () => void) {
+  render() {
+    this.parentElement.insertAdjacentHTML("afterbegin", this.generateMarkup());
+  }
+
+  onNextPage(cb: (e: MouseEvent) => void) {
     const nextBtnEl = document.getElementById("next-page-btn") as HTMLButtonElement;
 
     nextBtnEl.addEventListener("click", cb);
   }
 
-  handleDecrementPage(cb: () => void) {
+  onPreviousPage(cb: () => void) {
     const prevBtnEl = document.getElementById("prev-page-btn") as HTMLButtonElement;
 
     prevBtnEl.addEventListener("click", cb);
+  }
+
+  onPageChange(page: number, data: DataType) {
+    const prevPageBtn = document.getElementById("prev-page-btn") as HTMLButtonElement;
+    const nextPageBtn = document.getElementById("next-page-btn") as HTMLButtonElement;
+
+    if (prevPageBtn && nextPageBtn) {
+      if (page === 0) {
+        prevPageBtn.disabled = true;
+        prevPageBtn.classList.add("btn__disabled");
+      } else {
+        prevPageBtn.disabled = false;
+        prevPageBtn.classList.remove("btn__disabled");
+      }
+
+      if (page === data.length - 1) {
+        nextPageBtn.disabled = true;
+        nextPageBtn.classList.add("btn__disabled");
+      } else {
+        nextPageBtn.disabled = false;
+        nextPageBtn.classList.remove("btn__disabled");
+      }
+    }
   }
 }
 

@@ -1,3 +1,9 @@
+.container__uber {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
 .container__card {
   width: fit-content;
   max-width: 500px;

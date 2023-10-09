@@ -18,28 +18,16 @@
           <div id="nav-heading" class="nav__container--heading">
           </div>
           <a
+            aria-label="Go to saved photos page"
             id="saved"
             class="saved__container--uber"
             href={{htmlWebpackPlugin.options.savedRoute}}
           >
-            <span class="visibility-hidden">Saved page</span>
           </a>
         </div>
       </nav>
     </header>
     <main>
-      <dialog class="photo-dialog__container--uber" id="photo-dialog">
-        <button
-          class="photo-dialog__btn--close"
-          aria-label="Close dialog"
-          id="photo-dialog-close"
-        >
-          <svg class="" width="25px" height="25px">
-            <use href="/assets/close.svg#close" />
-          </svg>
-        </button>
-        <div class="photo-dialog__container--img" id="photo-dialog-container"></div>
-      </dialog>
       <section id="photos_container" class="photos__container--uber wrapper">
       </section>
       <section
@@ -47,5 +35,17 @@
         class="pagination-buttons__container--uber wrapper"
       ></section>
     </main>
+    <dialog class="photo-dialog__container--uber" id="photo-dialog">
+      <button
+        class="photo-dialog__btn--close"
+        aria-label="Close dialog"
+        id="photo-dialog-close"
+      >
+        <svg class="" width="25px" height="25px">
+          <use href="/assets/close.svg#close" />
+        </svg>
+      </button>
+      <div class="photo-dialog__container--img" id="photo-dialog-container"></div>
+    </dialog>
   </body>
 </html>

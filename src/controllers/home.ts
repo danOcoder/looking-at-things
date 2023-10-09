@@ -1,6 +1,7 @@
 import "../styles/normalize.css";
 import "../styles/reset.css";
 import "../styles/index.css";
+import "../styles/dialog.css";
 
 import { react } from "signia";
 
@@ -11,32 +12,59 @@ import { page } from "../models/page";
 import NavHeading from "../views/NavHeading/NavHeading";
 import SavedCount from "../views/SavedCount/SavedCount";
 import Photos from "../views/Photos/Photos";
-import PhotoDialog from "../views/PhotoDialog/PhotoDialog";
+import DialogImg from "../views/DialogImg/DialogImg";
 import PaginationButtons from "../views/PaginationButtons/PaginationButtons";
 
 import { getRandom } from "../api/getRandom";
 import { INITIAL_DATA_COUNT } from "../constants";
 
-// elements
-const dialogEl = document.getElementById("photo-dialog") as HTMLDialogElement;
-const dialogCloseEl = document.getElementById("photo-dialog-close") as HTMLButtonElement;
-const bodyEl = document.querySelector("body") as HTMLBodyElement;
-
 // variables
 let scrollPosition = 0;
 
-// event handlers
-const handleToggleSaved = (id: string) => {
-  const savedIndicatorEl = document.getElementById(`${id}-saved`) as HTMLElement;
+// elements
+const dialogEl = document.getElementById("photo-dialog") as HTMLDialogElement;
+const bodyEl = document.querySelector("body") as HTMLBodyElement;
+const dialogCloseBtn = document.getElementById("photo-dialog-close") as HTMLButtonElement;
 
-  if (saved.state.includes(id)) {
-    saved.removeSaved(id);
-    savedIndicatorEl.classList.remove("svg__heart--active");
-  } else {
+// handlers
+const handleToggleSaved = (id: string) => {
+  const savedIndicatorEl = document.getElementById(
+    `${id}-saved`
+  ) as unknown as SVGUseElement;
+
+  const savedIndicatorHref = savedIndicatorEl.href.baseVal;
+
+  if (savedIndicatorHref.includes("outline")) {
     saved.setSaved(id);
-    savedIndicatorEl.classList.add("svg__heart--active");
+    savedIndicatorEl.href.baseVal = savedIndicatorHref.replace("outline", "filled");
+  } else {
+    saved.removeSaved(id);
+    savedIndicatorEl.href.baseVal = savedIndicatorHref.replace("filled", "outline");
   }
 };
+
+const handleIndicateIsSaved = () => {
+  console.info("✅ handleIndicateIsSaved ran ✅");
+
+  const currData = data.state[page.state];
+
+  if (currData) {
+    const ids = currData.map((photo) => photo.id);
+
+    ids.forEach((id) => {
+      const savedIndicatorEl = document.getElementById(
+        `${id}-saved`
+      ) as unknown as SVGUseElement;
+
+      const savedIndicatorHref = savedIndicatorEl.href.baseVal;
+
+      if (saved.state.includes(id)) {
+        savedIndicatorEl.href.baseVal = savedIndicatorHref.replace("outline", "filled");
+      }
+    });
+  }
+};
+
 const handleOpenDialog = (id: string) => {
   const currentPage = page.state;
   const _data = data.state[currentPage];
@@ -44,10 +72,23 @@ const handleOpenDialog = (id: string) => {
   scrollPosition = window.scrollY;
   const photoIdx = _data.findIndex((photo) => photo.id === id);
 
-  PhotoDialog.render(_data[photoIdx]);
+  DialogImg.render(_data[photoIdx]);
   dialogEl.showModal();
   bodyEl.classList.add("dialog-open");
 };
+
+const handleNextPage = () => {
+  page.incrementPage();
+  handleIndicateIsSaved();
+  window.scrollTo(0, 0);
+};
+
+const handlePreviousPage = () => {
+  page.decrementPage();
+  handleIndicateIsSaved();
+  window.scrollTo(0, 0);
+};
+
 const handleCloseDialog = () => {
   dialogEl.classList.add("is-hidden");
   const handleAnimationEnd = () => {
@@ -59,62 +100,40 @@ const handleCloseDialog = () => {
   dialogEl.addEventListener("webkitAnimationEnd", handleAnimationEnd, false);
   bodyEl.classList.remove("dialog-open");
 };
+
+// initialization
+if (data.state.length === 0) data.setData(getRandom.bind(null, INITIAL_DATA_COUNT));
+NavHeading.render();
+PaginationButtons.render();
+dialogCloseBtn.addEventListener("click", handleCloseDialog);
+dialogEl.addEventListener("click", handleCloseDialog);
+PaginationButtons.onNextPage(handleNextPage);
+PaginationButtons.onPreviousPage(handlePreviousPage);
+
 // signals
-react("update photos", () => {
-  console.log("photos updated");
+react("render photos", () => {
+  console.info("📷 rendered photos 📷");
 
-  if (data.state.length === 0) {
-    data.setData(getRandom.bind(null, INITIAL_DATA_COUNT));
-  }
+  const currData = data.state[page.state];
 
-  const currentPage = page.state;
-  const _data = data.state[currentPage];
+  const ids = currData.map((photo) => photo.id);
 
-  console.log("currentPage", currentPage);
-  console.log("_data", _data);
-
-  const ids = _data.map((photo) => photo.id);
-
-  Photos.render(_data);
-  Photos.handleSave(ids, handleToggleSaved);
-  Photos.handleDialog(ids, handleOpenDialog);
+  Photos.render(currData);
+  Photos.onSave(ids, handleToggleSaved);
+  Photos.onDialogOpen(ids, handleOpenDialog);
 });
-react("update saved count", () => {
-  console.log("saved count updated");
+
+react("render saved count", () => {
+  console.info("❤️ saved count updated ❤️");
 
   SavedCount.render(saved.state.length);
 });
-react("update page", () => {
-  console.log("page updated");
 
-  const currentPage = page.state;
-  const _data = data.state[currentPage];
+react("on page change", () => {
+  console.info("📄 page changed 📄");
 
-  PaginationButtons.render({
-    currentPage: currentPage,
-    totalPages: _data.length,
-  });
-
-  PaginationButtons.handleIncrementPage(() => {
-    page.incrementPage();
-  });
-  PaginationButtons.handleDecrementPage(() => {
-    page.decrementPage();
-  });
+  PaginationButtons.onPageChange(page.state, data.state);
 });
 
-// initial render
-NavHeading.render(null);
-dialogCloseEl.addEventListener("click", handleCloseDialog);
-dialogEl.addEventListener("click", handleCloseDialog);
-
-const ids = data.state[page.state].map((photo) => photo.id);
-ids.forEach((id) => {
-  const savedIndicatorEl = document.getElementById(`${id}-saved`) as HTMLElement;
-
-  if (saved.state.includes(id)) {
-    savedIndicatorEl.classList.add("svg__heart--active");
-  } else {
-    savedIndicatorEl.classList.remove("svg__heart--active");
-  }
-});
+// run this once on page load
+handleIndicateIsSaved();

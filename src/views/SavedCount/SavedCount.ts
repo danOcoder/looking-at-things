@@ -8,18 +8,19 @@ type State = number;
 
 class SavedCount extends View<State> {
   constructor(parentElement: HTMLElement) {
-    super(parentElement, "");
+    super(parentElement);
   }
 
   generateMarkup(state: State) {
     return html`
-      <span class="${styles["text__count"]}">${state}</span>
-      <svg
-        class="${["svg__heart", state !== 0 && "svg__heart--active"].join(" ")}"
-        width="85px"
-        height="85px"
+      <span
+        class="${styles["text__count"]}${state
+          ? " " + styles["text__count--visible"]
+          : ""}"
+        >${state}</span
       >
-        <use href="${HeartIcon}#heart" />
+      <svg width="85px" height="85px">
+        <use href="${HeartIcon}#${state ? "filled" : "outline"}" />
       </svg>
     `;
   }
