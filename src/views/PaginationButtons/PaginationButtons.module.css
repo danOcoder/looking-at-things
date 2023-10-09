@@ -1,0 +1,13 @@
+.container__inner {
+  display: flex;
+  column-gap: 30px;
+}
+
+.btn {
+  transition: all 0.2s ease-in-out;
+}
+
+/* translate position by 1px when clicked (& not disabled) */
+.btn:not(:disabled):active {
+  transform: translateY(1px);
+}

@@ -48,12 +48,18 @@
   --font-architects: "Architects Daughter", sans-serif;
 
   /* font weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
 
   /* border radius */
   --border-radius-md: 4px;
   --border-radius-lg: 8px;
   --border-radius-xl: 16px;
   --border-radius-xxl: 32px;
+
+  /* transition duration */
+  --duration: 250ms;
 }
 
 body {
@@ -97,8 +103,12 @@ body {
   fill: var(--white);
 }
 
-.svg__heart--active {
+.svg__heart--active #path2 {
   fill: var(--rose);
+}
+
+.btn__disabled {
+  opacity: 0.5;
 }
 
 /* nav */
@@ -129,143 +139,16 @@ body {
 /* photos */
 .photos__container--uber {
   border: 1px solid red;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 20px;
   padding-top: 50px;
-  row-gap: 20px;
 }
 
-/* photo dialog – animation from https://www.cssscript.com/accessible-modal-dialog-animations/ */
-
-.photo-dialog__btn--close {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  cursor: pointer;
-}
-
-.photo-dialog__container--uber {
-  position: relative;
-  padding: 30px;
-  border: none;
-  background: transparent;
-  --animation-in-settings: 500ms cubic-bezier(0.25, 0, 0.3, 1) normal;
-  --animation-out-settings: 500ms cubic-bezier(0.5, -0.5, 0.1, 1.5) normal;
-}
-
-.photo-dialog__container--uber[open] {
-  -webkit-animation: slidein var(--animation-in-settings);
-  animation: slidein var(--animation-in-settings);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .photo-dialog__container--uber[open] {
-    -webkit-animation: fadein var(--animation-out-settings);
-    animation: fadein var(--animation-out-settings);
-  }
-}
-
-.photo-dialog__container--uber.is-hidden {
-  -webkit-animation: minimize var(--animation-out-settings);
-  animation: minimize var(--animation-out-settings);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .photo-dialog__container--uber.is-hidden {
-    -webkit-animation: fadeout var(--animation-out-settings);
-    animation: fadeout var(--animation-out-settings);
-  }
-}
-
-.photo-dialog__container--uber::backdrop {
-  background-color: #ffc9ef;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  -webkit-backdrop-filter: blur(0.5rem);
-  backdrop-filter: blur(0.5rem);
-  -webkit-animation: none;
-  animation: none;
-}
-
-.photo-dialog__container--uber[open]::-webkit-backdrop {
-  -webkit-animation: fadein var(--animation-in-settings);
-  animation: fadein var(--animation-in-settings);
-}
-
-.photo-dialog__container--uber[open]::backdrop {
-  -webkit-animation: fadein var(--animation-in-settings);
-  animation: fadein var(--animation-in-settings);
-}
-
-.photo-dialog__container--uber.is-hidden::-webkit-backdrop {
-  -webkit-animation: fadeout var(--animation-out-settings);
-  animation: fadeout var(--animation-out-settings);
-}
-
-.photo-dialog__container--uber.is-hidden::backdrop {
-  -webkit-animation: fadeout var(--animation-out-settings);
-  animation: fadeout var(--animation-out-settings);
-}
-
-@-webkit-keyframes slidein {
-  from {
-    opacity: 0;
-    transform: translateY(50%);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes slidein {
-  from {
-    opacity: 0;
-    transform: translateY(50%);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@-webkit-keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@-webkit-keyframes fadeout {
-  to {
-    opacity: 0;
-  }
-}
-@keyframes fadeout {
-  to {
-    opacity: 0;
-  }
-}
-@-webkit-keyframes minimize {
-  to {
-    opacity: 0;
-    transform: scale(0);
-  }
-}
-@keyframes minimize {
-  to {
-    opacity: 0;
-    transform: scale(0);
-  }
+/* pagination buttons */
+.pagination-buttons__container--uber {
+  border: 1px solid red;
+  display: flex;
+  justify-content: center;
+  padding: 50px;
 }

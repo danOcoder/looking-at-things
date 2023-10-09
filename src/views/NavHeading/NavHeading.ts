@@ -1,13 +1,10 @@
 import styles from "./NavHeading.module.css";
 
-import View from "../../types/classes/View";
 import { html } from "../../constants";
 import Logo from "../../assets/logo.png";
 
-class NavHeading extends View<null> {
-  constructor(parentElement: HTMLElement) {
-    super(parentElement, "");
-  }
+class NavHeading {
+  constructor(private parentElement: HTMLElement) {}
 
   generateMarkup() {
     return html`
@@ -16,6 +13,10 @@ class NavHeading extends View<null> {
       </div>
       <h1 class=${styles["text__heading"]}>Looking At Things</h1>
     `;
+  }
+
+  render() {
+    this.parentElement.insertAdjacentHTML("afterbegin", this.generateMarkup());
   }
 }
 
