@@ -137,3 +137,4 @@ react("on page change", () => {
 
 // run this once on page load
 handleIndicateIsSaved();
+PaginationButtons.onPageChange(page.state, data.state);
