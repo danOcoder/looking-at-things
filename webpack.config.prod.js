@@ -94,6 +94,14 @@ module.exports = {
           from: "./src/assets/close.svg",
           to: "assets/close.svg",
         },
+        {
+          from: "./src/assets/linkedin.png",
+          to: "assets/linkedin.png",
+        },
+        {
+          from: "./src/assets/github.png",
+          to: "assets/github.png",
+        },
       ],
     }),
     new Dotenv({

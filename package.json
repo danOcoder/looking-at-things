@@ -25,6 +25,7 @@
   "dependencies": {
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "favicons": "^7.1.4",
     "immer": "^10.0.2",
     "signia": "^0.1.4"
   },
