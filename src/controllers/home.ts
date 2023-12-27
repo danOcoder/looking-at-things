@@ -134,8 +134,6 @@ const handleClearSearchInput = () => {
 };
 
 const handleGetRandom = () => {
-  console.log("🔀 handleGetRandom ran 🔀");
-
   data.setData(getRandom.bind(null, DATA_COUNT));
   setSateInStorage("query", "");
 

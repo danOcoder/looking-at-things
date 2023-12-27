@@ -15,8 +15,6 @@ export const getRandom = async (
 
     return response as PhotoData.Response;
   } catch (error) {
-    console.log("error", error);
-
     // TODO: Add error handling - Sentry?
     console.error(error);
 
