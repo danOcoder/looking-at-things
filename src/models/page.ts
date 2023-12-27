@@ -16,6 +16,10 @@ class Page extends State<PageType> {
   decrementPage() {
     this._state.update((prev) => prev - 1);
   }
+
+  resetPage() {
+    this._state.set(INITIAL_STATE);
+  }
 }
 
 export const page = new Page(INITIAL_STATE, "Page._state");

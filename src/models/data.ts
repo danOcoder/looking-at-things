@@ -16,9 +16,7 @@ class Data extends State<DataType> {
 
   setData(fn: () => Promise<PhotoData.Response>) {
     fn().then((res) => {
-      const { response } = res;
-
-      const data = Array.isArray(response) ? paginateData(response) : [];
+      const data = paginateData(res.response);
 
       this._state.set(data);
       setSateInStorage("data", data);
@@ -27,15 +25,3 @@ class Data extends State<DataType> {
 }
 
 export const data = new Data(INITIAL_STATE, "Data._state");
-
-// import type { Patch } from "immer";
-
-// const startEpoch = this._state.lastChangedEpoch;
-
-// this._state.set(page + 1);
-
-// const computedDiff = this._state.getDiffSince(startEpoch) as [
-//   [PageType, Patch[], Patch[]]
-// ];
-
-// this._prevState.set(computedDiff[0][2][0].value);
