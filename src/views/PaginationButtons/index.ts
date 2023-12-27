@@ -1,4 +1,4 @@
-import styles from "./PaginationButtons.module.css";
+import styles from "./styles.module.css";
 
 import type { DataType } from "../../models/data";
 
@@ -43,8 +43,20 @@ class PaginationButtons {
   }
 
   onPageChange(page: number, data: DataType) {
+    console.log("data", data);
+
     const prevPageBtn = document.getElementById("prev-page-btn") as HTMLButtonElement;
     const nextPageBtn = document.getElementById("next-page-btn") as HTMLButtonElement;
+
+    if (data.length === 0) {
+      prevPageBtn.disabled = true;
+      prevPageBtn.classList.add("btn__disabled");
+
+      nextPageBtn.disabled = true;
+      nextPageBtn.classList.add("btn__disabled");
+
+      return;
+    }
 
     if (prevPageBtn && nextPageBtn) {
       if (page === 0) {

@@ -1,0 +1,28 @@
+.container__logo {
+  width: 80px;
+  height: auto;
+}
+
+.img__logo {
+  height: auto;
+  max-width: 100%;
+  display: block;
+}
+
+.text__heading {
+  font-size: var(--50px);
+  color: var(--black);
+}
+
+@media (max-width: 800px) {
+  .text__heading {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+  }
+}

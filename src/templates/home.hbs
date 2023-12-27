@@ -28,15 +28,22 @@
       </nav>
     </header>
     <main>
-      <section></section>
-      <section id="photos_container" class="photos__container--uber wrapper">
+      <section id="search" class="search__container--uber wrapper">
+      </section>
+      <section id="no_results" class="wrapper hide">
+        <div class="wrapper no-results__container">
+          <p class="no-results__text--main">Sorry :(</p>
+          <p class="no-results__text--secondary">We couldn't find any of those things!</p>
+        </div>
+      </section>
+      <section id="photos_container" class="wrapper">
       </section>
       <section
         id="pagination_buttons"
         class="pagination-buttons__container--uber wrapper"
       ></section>
     </main>
-    <dialog class="photo-dialog__container--uber" id="photo-dialog">
+    <dialog id="photo-dialog" class="photo-dialog__container--uber">
       <button
         class="photo-dialog__btn--close"
         aria-label="Close dialog"
@@ -81,4 +88,7 @@
       <p class="footer__text--copyright">© 2023 (jk you can totally copy this)</p>
     </footer>
   </body>
+  {{! <script>
+    console.info(`👋 Thanks for checking out my code! I'm always trying to learn so please feel free to create a PR if you have any suggestions or improvements!`);
+  </script> }}
 </html>

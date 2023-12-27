@@ -9,17 +9,21 @@ import { saved } from "../models/saved";
 import { data } from "../models/data";
 import { page } from "../models/page";
 
-import NavHeading from "../views/NavHeading/NavHeading";
-import SavedCount from "../views/SavedCount/SavedCount";
-import Photos from "../views/Photos/Photos";
-import DialogImg from "../views/DialogImg/DialogImg";
-import PaginationButtons from "../views/PaginationButtons/PaginationButtons";
+import NavHeading from "../views/NavHeading";
+import SavedCount from "../views/SavedCount";
+import Search from "../views/Search";
+import Photos from "../views/Photos";
+import DialogImg from "../views/DialogImg";
+import PaginationButtons from "../views/PaginationButtons";
 
 import { getRandom } from "../api/getRandom";
-import { INITIAL_DATA_COUNT } from "../constants";
+import { DATA_COUNT } from "../constants";
+import { setSateInStorage } from "../utils/setStateInStorage";
+import { getStateFromStorage } from "../utils/getStateFromStorage";
 
 // variables
 let scrollPosition = 0;
+const searchQuery = getStateFromStorage<string>("query", "");
 
 // elements
 const dialogEl = document.getElementById("photo-dialog") as HTMLDialogElement;
@@ -37,9 +41,11 @@ const handleToggleSaved = (id: string) => {
   if (savedIndicatorHref.includes("outline")) {
     saved.setSaved(id);
     savedIndicatorEl.href.baseVal = savedIndicatorHref.replace("outline", "filled");
+    savedIndicatorEl.classList.add("icon__heart--filled");
   } else {
     saved.removeSaved(id);
     savedIndicatorEl.href.baseVal = savedIndicatorHref.replace("filled", "outline");
+    savedIndicatorEl.classList.remove("icon__heart--filled");
   }
 };
 
@@ -60,6 +66,7 @@ const handleIndicateIsSaved = () => {
 
       if (saved.state.includes(id)) {
         savedIndicatorEl.href.baseVal = savedIndicatorHref.replace("outline", "filled");
+        savedIndicatorEl.classList.add("icon__heart--filled");
       }
     });
   }
@@ -101,26 +108,94 @@ const handleCloseDialog = () => {
   bodyEl.classList.remove("dialog-open");
 };
 
+const handleSearchSubmit = function (this: HTMLFormElement, event: SubmitEvent) {
+  event.preventDefault();
+
+  const formData = new FormData(this);
+  const queryParam = Object.fromEntries(formData.entries())["search-query"] as string;
+
+  if (!queryParam.trim()) {
+    const searchInputEl = document.getElementById("search-query") as HTMLInputElement;
+    searchInputEl.value = "";
+    return;
+  }
+
+  data.setData(getRandom.bind(null, DATA_COUNT, queryParam));
+  setSateInStorage("query", queryParam);
+
+  if (page.state !== 0) {
+    page.resetPage();
+  }
+};
+
+const handleClearSearchInput = () => {
+  const searchInputEl = document.getElementById("search-query") as HTMLInputElement;
+  if (searchInputEl.value) searchInputEl.value = "";
+};
+
+const handleGetRandom = () => {
+  data.setData(getRandom.bind(null, DATA_COUNT));
+  setSateInStorage("query", "");
+
+  if (page.state !== 0) {
+    page.resetPage();
+  }
+
+  handleClearSearchInput();
+};
+
+const handleClearSearch = () => {
+  const currSearchQuery = getStateFromStorage<string>("query", "");
+
+  if (currSearchQuery !== "") {
+    handleGetRandom();
+  }
+
+  handleClearSearchInput();
+};
+
 // initialization
-if (data.state.length === 0) data.setData(getRandom.bind(null, INITIAL_DATA_COUNT));
-NavHeading.render();
+if (data.state.length === 0 && !searchQuery) {
+  data.setData(getRandom.bind(null, DATA_COUNT));
+}
+NavHeading();
 PaginationButtons.render();
+Search.render(searchQuery);
 dialogCloseBtn.addEventListener("click", handleCloseDialog);
 dialogEl.addEventListener("click", handleCloseDialog);
 PaginationButtons.onNextPage(handleNextPage);
 PaginationButtons.onPreviousPage(handlePreviousPage);
+PaginationButtons.onPageChange(page.state, data.state);
+Search.onSubmit(handleSearchSubmit);
+Search.onRandom(handleGetRandom);
+Search.onClear(handleClearSearch);
 
 // signals
 react("render photos", () => {
   console.info("📷 rendered photos 📷");
 
+  const noResultsContainerEl = document.getElementById("no_results") as HTMLElement;
+  const photosContainerEl = document.getElementById("photos_container") as HTMLElement;
+
   const currData = data.state[page.state];
 
-  const ids = currData.map((photo) => photo.id);
-
   Photos.render(currData);
-  Photos.onSave(ids, handleToggleSaved);
-  Photos.onDialogOpen(ids, handleOpenDialog);
+
+  if (currData) {
+    photosContainerEl.classList.remove("hide");
+    photosContainerEl.classList.add("show");
+    noResultsContainerEl.classList.remove("show");
+    noResultsContainerEl.classList.add("hide");
+
+    const ids = currData.map((photo) => photo.id);
+    Photos.onSave(ids, handleToggleSaved);
+    Photos.onDialogOpen(ids, handleOpenDialog);
+  } else {
+    photosContainerEl.classList.remove("show");
+    photosContainerEl.classList.add("hide");
+    noResultsContainerEl.classList.remove("hide");
+    noResultsContainerEl.classList.add("show");
+  }
 });
 
 react("render saved count", () => {
@@ -135,6 +210,5 @@ react("on page change", () => {
   PaginationButtons.onPageChange(page.state, data.state);
 });
 
-// run this once on page load
+// initial render
 handleIndicateIsSaved();
-PaginationButtons.onPageChange(page.state, data.state);

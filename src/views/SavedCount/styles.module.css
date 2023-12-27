@@ -1,7 +1,6 @@
 .text__count {
-  font-family: var(--font-architects);
   font-size: var(--16px);
-  color: var(--black);
+  color: var(--white);
   font-weight: var(--font-weight-bold);
   position: absolute;
   top: 50%;

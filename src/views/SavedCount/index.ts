@@ -1,4 +1,4 @@
-import styles from "./SavedCount.module.css";
+import styles from "./styles.module.css";
 
 import View from "../../types/classes/View";
 import { html } from "../../constants";
@@ -19,7 +19,7 @@ class SavedCount extends View<State> {
           : ""}"
         >${state}</span
       >
-      <svg width="85px" height="85px">
+      <svg width="85px" height="85px" class="${state ? "icon__heart--filled" : ""}">
         <use href="${HeartIcon}#${state ? "filled" : "outline"}" />
       </svg>
     `;
