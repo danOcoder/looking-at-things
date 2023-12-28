@@ -2,6 +2,8 @@ import { DUMMY_RESPONSE } from "../constants";
 import { PhotoData } from "../types/api";
 import { getJSON } from "./getJSON";
 
+const API_URL = process.env.API_URL;
+
 export const getRandom = async (
   count: number,
   query: string | undefined = undefined
@@ -9,9 +11,7 @@ export const getRandom = async (
   const queryParam = query ? `&query=${query}` : "";
 
   try {
-    const response = await getJSON(
-      `${process.env.API_URL}random?count=${count}${queryParam}`
-    );
+    const response = await getJSON(`${API_URL}random?count=${count}${queryParam}`);
 
     return response as PhotoData.Response;
   } catch (error) {

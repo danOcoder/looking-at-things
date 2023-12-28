@@ -89,20 +89,7 @@ module.exports = {
   },
   plugins: [
     new CopyPlugin({
-      patterns: [
-        {
-          from: "./src/assets/close.svg",
-          to: "assets/close.svg",
-        },
-        {
-          from: "./src/assets/linkedin.png",
-          to: "assets/linkedin.png",
-        },
-        {
-          from: "./src/assets/github.png",
-          to: "assets/github.png",
-        },
-      ],
+      patterns: [],
     }),
     new Dotenv({
       path: "./.env.prod",

@@ -20,10 +20,8 @@ class DialogImg extends View<State> {
 
     return html`
       <div
-        class="${[
-          styles["container__img"],
-          isPortrait && styles["container__img--portrait"],
-        ].join(" ")}"
+        style="${isPortrait ? "aspect-ratio: 1 / 1.5;" : "aspect-ratio: 1.5 / 1;"}"
+        class="${styles["container__img"]}"
       >
         <img class="${[styles["img"]].join(" ")}" src=${regular} alt=${alt_description} />
       </div>

@@ -61,17 +61,17 @@
   max-width: fit-content;
 }
 
-.btn__random:hover,
-.btn__random:focus,
-.btn__random:focus-visible {
-  background-color: var(--cerise600);
-}
-
 .btn__random:active {
   background-color: var(--cerise700);
 }
 
 /* common styles */
+
+.btn__random:hover,
+.btn__random:focus,
+.btn__random:focus-visible {
+  background-color: var(--cerise600);
+}
 
 .input__query,
 .btn__search,

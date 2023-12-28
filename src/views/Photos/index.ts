@@ -65,7 +65,9 @@ class Photos extends View<State> {
                 </div>
                 <div class=${styles["container__details"]}>
                   ${nameEl.outerHTML}
-                  <button aria-label="Indicate saved" id="${id}-save-btn" name="save">
+                  <button class="${
+                    styles["btn__save"]
+                  } aria-label="Indicate saved" id="${id}-save-btn" name="save">
                     <svg width="35px" height="35px">
                       <use id="${id}-saved" href="${HeartIcon}#outline" />
                     </svg>
