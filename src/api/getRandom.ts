@@ -2,7 +2,9 @@ import { DUMMY_RESPONSE } from "../constants";
 import { PhotoData } from "../types/api";
 import { getJSON } from "./getJSON";
 
-const API_URL = process.env.API_URL;
+// const API_URL = process.env.API_URL;
+// harding coding for now – test to see if this fixes issue with cyclic
+const API_URL = "https://zany-pink-jackrabbit-belt.cyclic.app/";
 
 export const getRandom = async (
   count: number,
