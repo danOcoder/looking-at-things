@@ -75,17 +75,6 @@
   animation: fadeout var(--animation-out-settings);
 }
 
-/* .photo-dialog__container--inner {
-  padding-top: 35px;
-}
-
-.photo-dialog__btn--close {
-  position: absolute;
-  top: 0;
-  right: 0;
-  cursor: pointer;
-} */
-
 @-webkit-keyframes slidein {
   from {
     opacity: 0;
