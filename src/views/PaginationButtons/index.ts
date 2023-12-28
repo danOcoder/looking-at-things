@@ -17,7 +17,7 @@ class PaginationButtons {
             <use href="${PreviousIcon}#previous" />
           </svg>
         </button>
-        <button id="next-page-btn" aria-label="Next Page">
+        <button id="next-page-btn" aria-label="Next Page" class=${styles["btn"]}>
           <svg width="65px" height="65px">
             <use href="${NextIcon}#next" />
           </svg>
@@ -43,8 +43,6 @@ class PaginationButtons {
   }
 
   onPageChange(page: number, data: DataType) {
-    console.log("data", data);
-
     const prevPageBtn = document.getElementById("prev-page-btn") as HTMLButtonElement;
     const nextPageBtn = document.getElementById("next-page-btn") as HTMLButtonElement;
 

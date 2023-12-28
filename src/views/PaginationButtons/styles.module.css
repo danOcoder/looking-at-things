@@ -4,10 +4,16 @@
 }
 
 .btn {
-  transition: all 0.2s ease-in-out;
+  transition: transform var(--duration) ease-in-out;
 }
 
 /* translate position by 1px when clicked (& not disabled) */
 .btn:not(:disabled):active {
   transform: translateY(1px);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--cerise900);
+  outline-offset: 2px;
+  border-radius: var(--border-radius-md);
 }

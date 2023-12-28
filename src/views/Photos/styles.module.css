@@ -70,7 +70,20 @@
   cursor: not-allowed;
 }
 
-/* break points */
+/* common styles */
+
+.container__photo:focus-visible,
+.text__name--link:focus-visible,
+.btn__save:focus-visible {
+  outline: 2px solid var(--cerise900);
+  outline-offset: 2px;
+}
+
+.text__name--link:focus-visible,
+.btn__save:focus-visible {
+  border-radius: var(--border-radius-md);
+}
+
 @media (max-width: 1200px) {
   .container__card {
     width: calc(50% - 10px);

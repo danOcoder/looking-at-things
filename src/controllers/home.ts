@@ -15,6 +15,7 @@ import Search from "../views/Search";
 import Photos from "../views/Photos";
 import DialogImg from "../views/DialogImg";
 import PaginationButtons from "../views/PaginationButtons";
+import Footer from "../views/Footer";
 
 import { getRandom } from "../api/getRandom";
 import { DATA_COUNT } from "../constants";
@@ -28,7 +29,6 @@ const searchQuery = getStateFromStorage<string>("query", "");
 // elements
 const dialogEl = document.getElementById("photo-dialog") as HTMLDialogElement;
 const bodyEl = document.querySelector("body") as HTMLBodyElement;
-const dialogCloseBtn = document.getElementById("photo-dialog-close") as HTMLButtonElement;
 
 // handlers
 const handleToggleSaved = (id: string) => {
@@ -161,14 +161,15 @@ if (data.state.length === 0 && !searchQuery) {
 NavHeading();
 PaginationButtons.render();
 Search.render(searchQuery);
-dialogCloseBtn.addEventListener("click", handleCloseDialog);
 dialogEl.addEventListener("click", handleCloseDialog);
+dialogEl.addEventListener("keydown", handleCloseDialog);
 PaginationButtons.onNextPage(handleNextPage);
 PaginationButtons.onPreviousPage(handlePreviousPage);
 PaginationButtons.onPageChange(page.state, data.state);
 Search.onSubmit(handleSearchSubmit);
 Search.onRandom(handleGetRandom);
 Search.onClear(handleClearSearch);
+Footer();
 
 // signals
 react("render photos", () => {

@@ -212,34 +212,3 @@ body {
   padding: 50px;
   text-align: center;
 }
-
-.footer__container--inner {
-  display: flex;
-  justify-content: center;
-  font-size: var(--18px);
-  padding-bottom: 8px;
-}
-
-.footer__text--copyright {
-  font-size: var(--14px);
-}
-
-.footer__img--logo {
-  margin-left: 3px;
-}
-
-.footer__text--spacer {
-  position: relative;
-  padding-right: 20px;
-}
-
-.footer__text--spacer::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 10px;
-  width: 2px;
-  height: 24px;
-  background: var(--black);
-  opacity: 0.5;
-}
