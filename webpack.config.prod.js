@@ -3,7 +3,6 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
-const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -88,9 +87,6 @@ module.exports = {
     ],
   },
   plugins: [
-    new CopyPlugin({
-      patterns: [],
-    }),
     new Dotenv({
       path: "./.env.prod",
     }),
